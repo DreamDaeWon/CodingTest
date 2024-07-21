@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	long long iCase{};
+	long long iA{}, iB{};
+	long long iRoad{};
+	long long iFinal{};
+
+	cin >> iCase;
+
+	long long* iAllFinal = new long long[iCase];
+
+	for (int i = 0; i < iCase; ++i)
+	{
+		cin >> iA >> iB;
+
+		iRoad = 1;
+		iFinal = 1;
+
+		for (int j = iA; j > 0; --j)
+		{
+			iRoad *= j;
+		}
+		for (int j = iA; j > 0; --j)
+		{
+			iFinal *= iB--;
+		}
+
+		iAllFinal[i] = iFinal / iRoad;
+
+		cout << iAllFinal[i] << endl;
+	}
+
+	/*for (int i = 0; i < iCase; ++i)
+	{
+		cout << iAllFinal[i] << endl;
+	}*/
+
+	delete[] iAllFinal;
+	iAllFinal = nullptr;
+
+	return 0;
+}
