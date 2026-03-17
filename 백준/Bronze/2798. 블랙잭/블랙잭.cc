@@ -1,56 +1,50 @@
 #include <iostream>
 #include <vector>
-using namespace std;
+#include <cmath>
 
 int main()
 {
-	int iAllCardNum{};
+	int N{}; // 카드의 개수
+	int M{}; // 가깝게 만들어야 하는 기준
+	std::vector<int> cards{}; // 카드들의 숫자
+	std::cin >> N;
+	std::cin >> M;
 
-	int WantNum{};
+	std::vector<int> allway{}; // 모든 경우의 수
 
-	vector<int> AllNum{};
+	cards.reserve(N);
 
-	cin >> iAllCardNum >> WantNum;
-
-	int A{};
-	for (int i = 0; i < iAllCardNum; ++i)
+	int temp{};
+	for (int i = 0; i < N; ++i)
 	{
-		cin >> A;
-		AllNum.push_back(A);
+		std::cin >> temp;
+		cards.push_back(temp);
 	}
 
-	int iResult{};
-	int Last{2100000000};
-	int Now{};
-
-	for (int i = 0; i < AllNum.size(); ++i)
+	for (int i = 0; i < cards.size()-2; ++i)
 	{
-		for (int j = 0; j < AllNum.size(); ++j)
+		for (int j = i+1; j < cards.size()-1; ++j)
 		{
-			if (j == i)
+			for (int k = j+1; k < cards.size(); ++k)
 			{
-				continue;
-			}
-			for (int k = 0; k < AllNum.size(); ++k)
-			{
-				if (j == k || i == k)
-				{
-					continue;
-				}
-				Now = AllNum[i] + AllNum[j] + AllNum[k];
-
-				Now = WantNum - Now;
-
-				if (0 <= Now && Last > Now)
-				{
-					Last = Now;
-					iResult = AllNum[i] + AllNum[j] + AllNum[k];
-				}
+				allway.push_back(cards[i] + cards[j] + cards[k]);
 			}
 		}
 	}
 
-	cout << iResult;
+	int result{}; // 결과
 
-	return 0;
+	int test{400000000}; // 테스트
+
+	for (int& i : allway)
+	{
+		if (i <= M && test > std::abs(i - M))
+		{
+			test = std::abs(i - M);
+			result = i;
+		}
+	}
+
+	std::cout << result << std::endl;
+
 }
