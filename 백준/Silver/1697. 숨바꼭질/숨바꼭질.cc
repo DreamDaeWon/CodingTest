@@ -19,8 +19,8 @@ int main()
 		q.pop();
 
 		// 방문 했으면 건너뛰기
-		if(visited.find(a) != visited.end())
-			continue;
+		/*if(visited.find(a) != visited.end())
+			continue;*/
 		// 방문처리
 		visited.insert(a);
 
@@ -34,15 +34,15 @@ int main()
 		++death;
 
 		// 경우의 수 3 가지 넣기
-		if(a - 1 >= 0)
+		if(a - 1 >= 0 && visited.find(a - 1) == visited.end())
 		{
 			q.push({ a - 1, death });
 		}
-		if(a + 1 <= 1000000)
+		if(a + 1 <= 1000000 && visited.find(a + 1) == visited.end())
 		{
 			q.push({ a + 1, death });
 		}
-		if (a * 2 <= 1000000)
+		if (a * 2 <= 1000000 && visited.find(a * 2) == visited.end())
 		{
 			q.push({ a * 2, death });
 		}
